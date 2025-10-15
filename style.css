@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/3/3d/Football_pitch_blank.svg') no-repeat center center;
+  background-size: cover;
+  color: #1e05ff;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.header .logo {
+  height: 50px;
+}
+
+.pitch {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 70vh;
+  margin: 20px;
+}
+
+.player-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.player {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.player img {
+  width: 60px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
+
+.player span {
+  margin-top: 5px;
+  font-weight: bold;
+}
