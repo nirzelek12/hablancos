@@ -391,14 +391,12 @@ h1 {
 </div>
 
 <div class="formation-control" id="formation-control-buttons">
-    <label>בחר מערך:</label>
-    <button data-formation="4-3-3" class="active" aria-label="בחר מערך 4-3-3">4-3-3</button>
-    <button data-formation="4-4-2" aria-label="בחר מערך 4-4-2">4-4-2</button>
-    <button data-formation="4-2-3-1" aria-label="בחר מערך 4-2-3-1">4-2-3-1</button>
-    <button data-formation="3-5-2" aria-label="בחר מערך 3-5-2">3-5-2</button>
-    <button data-formation="4-1-2-1-2" aria-aria-label="בחר מערך 4-1-2-1-2">4-1-2-1-2</button>
-    <button data-formation="3-4-3" aria-aria-label="בחר מערך 3-4-3">3-4-3</button>
-    <button id="re-run-animation" aria-label="הפעל אנימציה מחדש">הצג הרכב (אנימציה)</button> 
+    <label>מערך פיקוד טקטי:</label>
+    <button data-formation="4-3-3" class="active">4-3-3</button>
+    <button data-formation="4-4-2">4-4-2</button>
+    <button data-formation="4-2-3-1">4-2-3-1</button>
+    <button data-formation="3-5-2">3-5-2</button>
+    <button id="re-run-animation">הצג פריסה (VISUALIZE)</button>
 </div>
 
     
@@ -538,8 +536,6 @@ const BASE_PLAYERS = [
     { id: 13, name: "Asencio", img: "images/players/asencio.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 14, name: "Alaba", img: "images/players/alaba.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 15, name: "Fran García", img: "images/players/fran.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
-    { id: 16, name: "Rudiger", img: "images/players/rudiger.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
-    { id: 17, name: "Trent", img: "images/players/trent.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 18, name: "Ceballos", img: "images/players/ceballos.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
     { id: 19, name: "Arda guler", img: "images/players/arda guler.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
     { id: 20, name: "Camavinga", img: "images/players/camavinga.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
@@ -547,6 +543,11 @@ const BASE_PLAYERS = [
     { id: 22, name: "Gonzalo", img: "images/players/gonzalo.png", position: "FWD", row: 0, slotIndex: -1, status: 'bench' },
     { id: 23, name: "Brahim", img: "images/players/brahim.jpg", position: "FWD", row: 0, slotIndex: -1, status: 'bench' },
     { id: 24, name: "Mendy", img: "images/players/mendy.jpg", position: "MID", row: 0, slotIndex: -1, status: 'injured' },
+    { id: 16, name: "Rudiger", img: "images/players/rudiger.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'injured' },
+    { id: 17, name: "Trent", img: "images/players/trent.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'injured' },
+    
+
+
 ];
 
 let allPlayers = [...BASE_PLAYERS]; 
@@ -1202,11 +1203,11 @@ document.addEventListener('DOMContentLoaded', () => {
     changeFormation('4-3-3', true); // יפעיל את renderLineup בפעם הראשונה
     
     document.getElementById('formation-control-buttons').addEventListener('click', (e) => {
-        const button = e.target.closest('button[data-formation]');
-        if (button) {
-            changeFormation(button.dataset.formation, true);
-        }
-    });
+    const button = e.target.closest('button[data-formation]');
+    if (button) {
+        changeFormation(button.dataset.formation, true);
+    }
+});
 
     document.getElementById('re-run-animation').addEventListener('click', runPitchAnimation);
     

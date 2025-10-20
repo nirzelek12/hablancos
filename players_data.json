@@ -1,0 +1,218 @@
+[
+    { 
+        "id": 1, 
+        "name": "Thibaut Courtois", 
+        "img": "images/players/courtois.jpg", 
+        "position": "GK", 
+        "row": 1, 
+        "slotIndex": 0, 
+        "status": "starter" 
+    },
+    { 
+        "id": 2, 
+        "name": "Carvajal", 
+        "img": "images/players/carvajal.jpg", 
+        "position": "DEF", 
+        "row": 2, 
+        "slotIndex": 3, 
+        "status": "starter" 
+    },
+    { 
+        "id": 3, 
+        "name": "Militao", 
+        "img": "images/players/militao.jpg", 
+        "position": "DEF", 
+        "row": 2, 
+        "slotIndex": 2, 
+        "status": "starter" 
+    },
+    { 
+        "id": 4, 
+        "name": "Hujisen", 
+        "img": "images/players/hujisen.jpg", 
+        "position": "DEF", 
+        "row": 2, 
+        "slotIndex": 1, 
+        "status": "starter" 
+    },
+    { 
+        "id": 5, 
+        "name": "Alvaro Carreras", 
+        "img": "images/players/alvaro_carreras.jpg", 
+        "position": "DEF", 
+        "row": 2, 
+        "slotIndex": 0, 
+        "status": "starter" 
+    },
+    { 
+        "id": 6, 
+        "name": "Tchouaméni", 
+        "img": "images/players/Tchouaméni.jpg", 
+        "position": "MID", 
+        "row": 3, 
+        "slotIndex": 2, 
+        "status": "starter" 
+    },
+    { 
+        "id": 7, 
+        "name": "Bellingham", 
+        "img": "images/players/bellingham.jpg", 
+        "position": "MID", 
+        "row": 3, 
+        "slotIndex": 1, 
+        "status": "starter" 
+    },
+    { 
+        "id": 8, 
+        "name": "Valverde", 
+        "img": "images/players/valverde.jpg", 
+        "position": "MID", 
+        "row": 3, 
+        "slotIndex": 0, 
+        "status": "starter" 
+    },
+    { 
+        "id": 9, 
+        "name": "Vini", 
+        "img": "images/players/vini.jpg", 
+        "position": "FWD", 
+        "row": 5, 
+        "slotIndex": 2, 
+        "status": "starter" 
+    },
+    { 
+        "id": 10, 
+        "name": "Mbappe", 
+        "img": "images/players/mbappe.jpeg", 
+        "position": "FWD", 
+        "row": 5, 
+        "slotIndex": 1, 
+        "status": "starter" 
+    },
+    { 
+        "id": 11, 
+        "name": "Mastantouno", 
+        "img": "images/players/mastantuono.jpg", 
+        "position": "MID", 
+        "row": 5, 
+        "slotIndex": 0, 
+        "status": "starter" 
+    },
+    { 
+        "id": 12, 
+        "name": "Lunin", 
+        "img": "images/players/lunin.jpg", 
+        "position": "GK", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 13, 
+        "name": "Asencio", 
+        "img": "images/players/asencio.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 14, 
+        "name": "Alaba", 
+        "img": "images/players/alaba.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 15, 
+        "name": "Fran García", 
+        "img": "images/players/fran.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 18, 
+        "name": "Ceballos", 
+        "img": "images/players/ceballos.jpg", 
+        "position": "MID", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 19, 
+        "name": "Arda guler", 
+        "img": "images/players/arda guler.jpg", 
+        "position": "MID", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 20, 
+        "name": "Camavinga", 
+        "img": "images/players/camavinga.jpg", 
+        "position": "MID", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 21, 
+        "name": "Endrick", 
+        "img": "images/players/endrick.jpg", 
+        "position": "FWD", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 22, 
+        "name": "Gonzalo", 
+        "img": "images/players/gonzalo.png", 
+        "position": "FWD", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 23, 
+        "name": "Brahim", 
+        "img": "images/players/brahim.jpg", 
+        "position": "FWD", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "bench" 
+    },
+    { 
+        "id": 24, 
+        "name": "Mendy", 
+        "img": "images/players/mendy.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "injured" 
+    },
+    { 
+        "id": 16, 
+        "name": "Rudiger", 
+        "img": "images/players/rudiger.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "injured" 
+    },
+    { 
+        "id": 17, 
+        "name": "Trent", 
+        "img": "images/players/trent.jpg", 
+        "position": "DEF", 
+        "row": 0, 
+        "slotIndex": -1, 
+        "status": "injured" 
+    }
+]

@@ -1,12 +1,13 @@
+
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <link rel="shortcut icon" type="image/x-icon" href="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/717f280bed475230e0023ddf508c79d1~tplv-tiktokx-cropcenter:1080:1080.jpeg?dr=14579&refresh_token=39912cc2&x-expires=1760698800&x-signature=887Ir%2BPwB7dsCJR7%2BVVaZQU%2FM4Q%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2" />
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>הרכב ריאל מדריד: הבלנאקוס</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
-<style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>הרכב ריאל מדריד: הבלנאקוס</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
 /* --- CORE DESIGN PRINCIPLES & COLORS (Per Design Guidelines) --- */
 * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Roboto', sans-serif; }
 
@@ -19,6 +20,24 @@ body {
     display: flex; flex-direction: column; align-items: center; 
     position: relative; overflow-x: hidden; 
 }
+
+.footer-copyright {
+    width: 100%;
+    background-color: #0c0d1b; /* צבע רקע כהה */
+    padding: 15px 0;
+    text-align: center;
+    color: #999; /* צבע טקסט אפור בהיר */
+    font-size: 0.9em;
+    border-top: 1px solid #1e3a8a; /* קו הפרדה עדין */
+    /* מבטיח שהפוטר נדחף לתחתית הדף כי ה-body הוא flex-container */
+    margin-top: auto; 
+    position: relative;
+    z-index: 10;
+}
+.footer-copyright p {
+    margin: 0;
+}
+
 
 /* Stadium Atmosphere Effect (Stronger) */
 body::before {
@@ -43,10 +62,10 @@ body::after {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.9); /* Depth shadows */
     position: relative; z-index: 20;
 }
-.header .logo { width: 80px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
+.header .logo { width: 40px; margin-bottom: 10px; filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.8)); }
 /* Hero Title: 3.5rem, 900, letter-spacing 3px, gold glow */
 h1 { 
-    font-size: 3.5em; color: #fff; letter-spacing: 3px; font-weight: 900;
+    font-size: 2em; color: #fff; letter-spacing: 3px; font-weight: 900;
     text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); 
 }
 
@@ -62,7 +81,7 @@ h1 {
 }
 /* For sidebar widgets that sit in the flex row */
 .sidebar-widget {
-    width: 600px;
+    width: 500px;
     height: fit-content;
     margin-top: 0;
     margin-bottom: 0;
@@ -73,7 +92,7 @@ h1 {
 
 /* Section Headers: 1.6-1.8rem, weight 900 */
 .bench-container-wrapper h2 {
-    font-size: 1.6em; font-weight: 900;
+    font-size: 1.2em; font: weight 300px;
 }
 
 /* Formation Buttons */
@@ -179,16 +198,44 @@ h1 {
     -webkit-user-drag: none;
     touch-action: none; /* מניעת פעולות ברירת מחדל של מגע בדפדפנים */
 }
+
+/* Compact style for players on the bench/injured lists (vertical) */
+.player-list-item-content {
+    /* Override for the compact vertical look */
+    width: 100%; 
+    height: 60px; /* Shorter card */
+    padding: 5px 10px;
+    justify-content: flex-start;
+    flex-direction: row-reverse; /* Right to left text/image */
+    gap: 10px;
+    font-size: 0.85em;
+}
+
 .player-card img, .player-list-item-content img { 
     width: 50px; height: 50px; border-radius: 50%; 
     border: 2px solid #fff; /* White Border for avatar */
     object-fit: cover;
 }
+
+.player-list-item-content img {
+    width: 40px; 
+    height: 40px;
+}
+
 .player-card:hover, .player-list-item-content:hover {
     /* Hover: Scale 1.04 with gold glow shadow */
     box-shadow: 0 0 20px #ffd700, 0 4px 15px rgba(88,166,255,0.3);
     transform: scale(1.04);
     z-index: 2;
+}
+
+/* Ensure name text flows correctly next to the image */
+.player-list-item-content span {
+    flex-grow: 1; 
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* Injured Status Variant */
@@ -207,7 +254,7 @@ h1 {
 
 /* Injury List (Left side of Bench row) */
 .injury-list-wrapper {
-    flex-basis: 250px; /* Fixed width for injured list */
+    flex-basis: 100px; /* Fixed width for injured list */
     flex-shrink: 0;
     border-left: 2px solid #ff3b3b; /* Separator */
     padding-left: 15px;
@@ -244,17 +291,72 @@ h1 {
     font-size: 1.4em;
 }
 
-.bench-section { 
-    overflow-x: auto; padding: 10px 0; white-space: nowrap; 
+/* --- NEW CSS FOR GROUPED BENCH --- */
+/* Ensure the overall bench container still scrolls and maintains nowrap */
+#bench-list-container {
+    padding: 10px 0;
+    min-height: 10px;
+    padding-top: 10px;
+    position: relative;
+    
+    display: flex; /* Use flex to arrange groups */
+    flex-wrap: wrap; /* Allows wrapping to the next line (row) */
+    gap: 20px; /* Space between the groups (rows and columns) */
+    overflow-x: hidden; 
 }
-.player-list { 
-    list-style: none; padding: 0; display: flex; gap: 20px; 
+
+#bench-list-container.drag-over-active { background-color: rgba(88, 166, 255, 0.1); border: 3px dashed #58a6ff !important; }
+
+/* Ensure each group acts as a block and sits next to each other */
+.bench-group-container {
+    flex-basis: 350px; /* Fixed width for the group container (column width) */
+    flex-grow: 0;
+    flex-shrink: 0;
+    
+    padding-left: 15px; /* Separation to the left in RTL */
+    border-left: 1px solid #4a4e69; /* Separator on the left in RTL */
 }
-#bench-container {
-    padding-top: 10px; 
-    min-height: 150px; 
+/* Fix for the right-most (first in RTL) group */
+.bench-group-container:last-child {
+    border-left: none;
+    padding-left: 0;
 }
-#bench-container.drag-over-active { background-color: rgba(88, 166, 255, 0.1); border: 3px dashed #58a6ff !important; }
+
+/* Style for the group header */
+.bench-group-container h3 {
+    color: #ffd700; 
+    font-size: 1.2em; 
+    border-bottom: 2px solid #ffd700; 
+    padding-bottom: 5px; 
+    margin: 0 0 10px 0; 
+    display: block; 
+    white-space: normal; /* Allow header text to wrap */
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.3);
+}
+
+/* Re-apply flex styling to the player list inside the group */
+.bench-group-container .player-list { 
+    list-style: none; 
+    padding: 0; 
+    display: flex; 
+    flex-direction: column; /* VERTICAL STACKING */
+    gap: 10px; /* Space between vertically stacked cards */
+    
+    /* MULTI-COLUMN WRAPPING LOGIC (Wrapping to the left in RTL mode) */
+    max-height: 400px; /* Maximum height before wrapping to a new column/line */
+    flex-wrap: wrap-reverse; /* WRAPS TO THE LEFT (RTL) - Combined with flex-direction: column */
+    align-content: flex-start; /* Ensures content fills from the top-right corner */
+    overflow-y: hidden; /* Prevents vertical scrollbar on the list itself */
+}
+
+/* Ensure the list item takes full width in the column */
+.bench-group-container .player-list li {
+    width: 100%;
+    margin: 0;
+    flex-shrink: 0; /* Important to enforce max-height/wrapping */
+}
+/* --- END NEW CSS FOR GROUPED BENCH --- */
+
 
 /* Action Buttons: Add (Success Green) & Delete (Alert Red) */
 .add-btn {
@@ -272,6 +374,16 @@ h1 {
     width: 25px; height: 25px; font-size: 14px;
     position: absolute; top: 5px; right: 5px; z-index: 5;
     cursor: pointer; transition: transform 0.2s;
+}
+
+/* Re-position the delete button for the new compact layout */
+.player-list-item-content .delete-btn {
+    position: static; 
+    margin-right: 5px;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    flex-shrink: 0;
 }
 
 /* --- D&D Visuals --- */
@@ -374,6 +486,13 @@ h1 {
         padding: 0;
     }
     .pitch-container { max-width: 95%; }
+    
+    /* ***התיקון לרווח הענק*** */
+    .pitch {
+        min-height: 500px; /* הפחתה משמעותית של הגובה המינימלי לשיפור פריסת המובייל */
+        padding: 10px; /* הפחתת ריפוד המגרש */
+    }
+    
     .player-row-slot { width: 120px; height: 100px; }
     h1 { font-size: 2.5em; }
     
@@ -418,10 +537,12 @@ h1 {
             <button class="add-btn" id="add-bench-btn" aria-label="הוסף שחקן לספסל">+</button>
         </div>
 
-        <div class="bench-section">
-            <ul class="player-list" id="bench-list" ondragover="handleDragOver(event)" ondragenter="handleDragEnter(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event)">
-            </ul>
-        </div>
+        <div id="bench-list-container" 
+            ondragover="handleDragOver(event)" 
+            ondragenter="handleDragEnter(event)" 
+            ondragleave="handleDragLeave(event)" 
+            ondrop="handleDrop(event)">
+            </div>
     </div>
 </div>
 
@@ -433,15 +554,16 @@ h1 {
         <div data-widget-type="entityStandings" data-entity-type="team" data-entity-id="131" data-lang="he-il" data-widget-id="629e3a6d-273c-4f84-9ba2-b70ab7d012e9"  data-limit-height-display="780" data-use-scrolling-buttons="true" data-theme="dark"> </div>
     </div>
 
-    <div class="pitch-container">
-        <div class="pitch" id="pitch-area">
-            <div class="player-row-container" id="row-1"></div> 
-            <div class="player-row-container" id="row-2"></div> 
-            <div class="player-row-container" id="row-3"></div> 
-            <div class="player-row-container" id="row-4"></div> 
-            <div class="player-row-container" id="row-5"></div>
-        </div>
+   <div class="pitch-container">
+    <div class="pitch" id="pitch-area">
+        <div class="player-row-container" id="row-1"></div> 
+        <div class="player-row-container" id="row-2"></div> 
+        <div class="player-row-container" id="row-3"></div> 
+        <div class="player-row-container" id="row-4"></div> 
+        <div class="player-row-container" id="row-5"></div>
+        <div class="player-row-container" id="row-6"></div>
     </div>
+</div>
     
     <div class="sidebar-widget scoreboard-widget" id="scoreboard-container">
         <div class="widget-header">לוח תוצאות ומשחקים</div>
@@ -465,6 +587,7 @@ h1 {
                 <option value="DEF">הגנה (DEF)</option>
                 <option value="MID">קישור (MID)</option>
                 <option value="FWD">התקפה (FWD)</option>
+                <option value="MID DEF">קשר/מגן (MID/DEF)</option>
             </select>
 
             <label for="playerImg">קישור לתמונה (URL):</label>
@@ -481,92 +604,129 @@ h1 {
         </form>
     </div>
 </div>
-
+</div>
+<footer class="footer-copyright">
+    <p>&copy; 2025 כל הזכויות שמורות לאבירם וניר.</p>
+</footer>
+<script src="https://widgets.365scores.com/main.js" defer></script>
+    
+<div class="modal-overlay" id="modal-overlay">
 <script>
 // --- GLOBAL DATA & MAPPING ---
-const ROW_TO_POSITION = { 1: "GK", 2: "DEF", 3: "MID", 4: "FWD", 5: "UP MID" };
+const ROW_TO_POSITION = { 1: "GK", 2: "DEF", 3: "MID", 4: "MID", 5: "FWD MID", 6: "FWD" };
 const FORMATIONS = {
-    // 1: GK is always 1
-    "4-3-3": { 1: 1, 2: 4, 3: 3, 4: 3 }, 
-    "4-4-2": { 1: 1, 2: 4, 3: 4, 4: 2 }, 
-    "4-2-3-1": { 1: 1, 2: 4, 3: 5, 4: 1 }, 
-    "3-5-2": { 1: 1, 2: 3, 3: 5, 4: 2 },
-    "4-1-2-1-2": { 1: 1, 2: 4, 3: 4, 4: 2 },
-    "3-4-3":{1:1,2:3,3:4,4:3},
+    "4-3-3": { 1: 1, 2: 4, 3: 3, 6: 3 }, 
+    "4-4-2": { 1: 1, 2: 4, 3: 4, 6: 2 }, 
+    "4-2-3-1": { 1: 1, 2: 4, 3: 2, 4: 3, 6: 1 }, 
+    "3-5-2": { 1: 1, 2: 3, 3: 5, 6: 2 },
+    "4-1-2-1-2": { 1: 1, 2: 4, 3: 1, 4: 2, 5: 1, 6: 2},
+    "3-4-3": { 1: 1, 2: 3, 3: 4, 6: 3 },
+    "5-3-2": {1:1,2:5,3:3,6:2},
+    "5-4-1": {1:1,2:5,3:4,6:1},
 
 };
+
+// NEW: Position Groups for the Bench (GK, DEF, CM, FWD)
+const POSITION_GROUPS = {
+    "GK": { name: "שוערים (GK)", groupKey: "GK", order: 1 },
+    "DEF": { name: "מגנים (DEF)", groupKey: "DEF", order: 2 },
+    "MID": { name: "קשרים (CM)", groupKey: "CM", order: 3 }, 
+    "FWD MID": { name: "קשרים (CM)", groupKey: "CM", order: 3 },
+    // **עדכון: הוספת הגדרה ל-Valverde**
+    "MID DEF": { name: "קשרים (CM)", groupKey: "CM", order: 3 }, // קבוצה תחת קשרים
+    "FWD": { name: "חלוצים (FWD)", groupKey: "FWD", order: 4 },
+    "Other": { name: "אחרים", groupKey: "Other", order: 5 } // Fallback
+};
+
 let currentFormation = FORMATIONS["4-3-3"];
-let nextPlayerId = 30; // ID מעודכן בהתאם לרשימה החדשה
+let nextPlayerId = 30;
 
 // Global D&D state for both Mouse and Touch
 let draggingElementId = null; 
 
 // Touch-specific state
 let currentTouchCard = null;
-let touchDragClone = null; // A clone for visual feedback for mobile D&D
+let touchDragClone = null;
 
-// פונקציה לבחירת צבע placeholder לפי תפקיד (משמשת כ-fallback)
 function getPlaceholderImage(position) {
     switch (position) {
-        case 'GK': return 'https://placehold.co/50x50/FFD700/000000?text=GK'; // Royal Gold
-        case 'DEF': return 'https://placehold.co/50x50/1e3a8a/FFFFFF?text=DEF'; // Real Blue
-        case 'MID': return 'https://placehold.co/50x50/58a6ff/000000?text=MID'; // Sky Blue
-        case 'FWD': return 'https://placehold.co/50x50/DDDDDD/FFFFFF?text=FWD'; // Alert Red
+        case 'GK': return 'https://placehold.co/50x50/FFD700/000000?text=GK';
+        case 'DEF': 
+        case 'MID DEF': // שימוש ב-DEF גם ל-MID DEF
+            return 'https://placehold.co/50x50/1e3a8a/FFFFFF?text=DEF';
+        case 'MID': return 'https://placehold.co/50x50/58a6ff/000000?text=MID';
+        case 'FWD MID': return 'https://placehold.co/50x50/58a6ff/000000?text=AM'; 
+        case 'FWD': return 'https://placehold.co/50x50/DDDDDD/FFFFFF?text=FWD';
         default: return 'https://placehold.co/50x50/CCCCCC/000000?text=P';
     }
 }
 
-// **********************************************
-// ********* הנתונים הסטטיים של הקבוצה - עודכן עם תמונות מקומיות *********
-// **********************************************
 const BASE_PLAYERS = [
-    // --- Starting Lineup (status: 'starter') ---
     { id: 1, name: "Thibaut Courtois", img: "images/players/courtois.jpg", position: "GK", row: 1, slotIndex: 0, status: 'starter' },
-    { id: 2, name: "Carvajal", img: "images/players/carvajal.jpg", position: "DEF", row: 2, slotIndex: 3, status: 'starter' }, 
+    { id: 2, name: "Carvajal", img: "images/players/carvajal.jpg", position: "DEF", row: 2, slotIndex: 3, status: 'injured' }, 
     { id: 3, name: "Militao", img: "images/players/militao.jpg", position: "DEF", row: 2, slotIndex: 2, status: 'starter' },
-    { id: 4, name: "Hujisen", img: "images/players/hujisen.jpg", position: "DEF", row: 2, slotIndex: 1, status: 'starter' },
+    { id: 4, name: "Hujisen", img: "images/players/hujisen.jpg", position: "DEF", row: 2, slotIndex: 1, status: 'injured' },
     { id: 5, name: "Alvaro Carreras", img: "images/players/alvaro_carreras.jpg", position: "DEF", row: 2, slotIndex: 0, status: 'starter' },
     { id: 6, name: "Tchouaméni", img: "images/players/Tchouaméni.jpg", position: "MID", row: 3, slotIndex: 2, status: 'starter' },
-    { id: 7, name: "Bellingham", img: "images/players/bellingham.jpg", position: "MID", row: 3, slotIndex: 1, status: 'starter' },
-    { id: 8, name: "Valverde", img: "images/players/valverde.jpg", position: "MID", row: 3, slotIndex: 0, status: 'starter' },
-    { id: 9, name: "Vini", img: "images/players/vini.jpg", position: "FWD", row: 4, slotIndex: 2, status: 'starter' },
-    { id: 10, name: "Mbappe", img: "images/players/mbappe.jpeg", position: "FWD", row: 4, slotIndex: 1, status: 'starter' },
-    { id: 11, name: "Mastantouno", img: "images/players/mastantuono.jpg", position: "MID", row: 4, slotIndex: 0, status: 'starter' },
+    { id: 7, name: "Bellingham", img: "images/players/bellingham.jpg", position: "FWD MID", row: 3, slotIndex: 1, status: 'starter' },
+    // **עדכון: פדה ואלוורדה הוא MID DEF**
+    { id: 8, name: "Valverde", img: "images/players/valverde.jpg", position: "MID DEF", row: 3, slotIndex: 0, status: 'starter' }, 
+    { id: 9, name: "Vini", img: "images/players/vini.jpg", position: "FWD", row: 6, slotIndex: 2, status: 'starter' }, 
+    { id: 10, name: "Mbappe", img: "images/players/mbappe.jpeg", position: "FWD", row: 6, slotIndex: 1, status: 'starter' },
+    { id: 11, name: "Mastantouno", img: "images/players/mastantuono.jpg", position: "FWD MID", row: 6, slotIndex: 0, status: 'starter' },
     
-    // --- Bench Players (status: 'bench') ---
     { id: 12, name: "Lunin", img: "images/players/lunin.jpg", position: "GK", row: 0, slotIndex: -1, status: 'bench' },
     { id: 13, name: "Asencio", img: "images/players/asencio.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 14, name: "Alaba", img: "images/players/alaba.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 15, name: "Fran García", img: "images/players/fran.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'bench' },
     { id: 18, name: "Ceballos", img: "images/players/ceballos.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
-    { id: 19, name: "Arda guler", img: "images/players/arda guler.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
+    { id: 19, name: "Arda guler", img: "images/players/arda guler.jpg", position: "FWD MID", row: 0, slotIndex: -1, status: 'bench' },
     { id: 20, name: "Camavinga", img: "images/players/camavinga.jpg", position: "MID", row: 0, slotIndex: -1, status: 'bench' },
     { id: 21, name: "Endrick", img: "images/players/endrick.jpg", position: "FWD", row: 0, slotIndex: -1, status: 'bench' },
     { id: 22, name: "Gonzalo", img: "images/players/gonzalo.png", position: "FWD", row: 0, slotIndex: -1, status: 'bench' },
-    { id: 23, name: "Brahim", img: "images/players/brahim.jpg", position: "FWD", row: 0, slotIndex: -1, status: 'bench' },
+    { id: 23, name: "Brahim", img: "images/players/brahim.jpg", position: "FWD MID", row: 0, slotIndex: -1, status: 'bench' },
     { id: 24, name: "Mendy", img: "images/players/mendy.jpg", position: "MID", row: 0, slotIndex: -1, status: 'injured' },
     { id: 16, name: "Rudiger", img: "images/players/rudiger.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'injured' },
-    { id: 17, name: "Trent", img: "images/players/trent.jpg", position: "DEF", row: 0, slotIndex: -1, status: 'injured' },
-    
-
-
+    { id: 17, name: "Trent", img: "images/players/trent.jpg", position: "MID DEF", row: 0, slotIndex: -1, status: 'injured' },
+    { id: 25, name: "Rodrygo", img: "images/players/rodrygo.jpg", position: "FWD", row: 0, slotIndex: -1, status: 'bench' }
 ];
 
 let allPlayers = [...BASE_PLAYERS]; 
 
-const pitchDivs = { 1: document.getElementById('row-1'), 2: document.getElementById('row-2'), 3: document.getElementById('row-3'), 4: document.getElementById('row-4')};
-const benchList = document.getElementById('bench-list');
+const pitchDivs = { 
+    1: document.getElementById('row-1'), 
+    2: document.getElementById('row-2'), 
+    3: document.getElementById('row-3'), 
+    4: document.getElementById('row-4'),
+    5: document.getElementById('row-5'),
+    6: document.getElementById('row-6')
+};
+
+// Removed old benchList const
 const injuryListContainer = document.getElementById('injury-list-container');
 const addPlayerForm = document.getElementById('add-player-form');
 const modalOverlay = document.getElementById('modal-overlay');
 const newPlayerForm = document.getElementById('new-player-form');
 
-
-// **********************************************
-// ********* פונקציות הוספה ומחיקה (הסרה לספסל/מחיקה) *********
-// **********************************************
-
 let targetPlacement = { status: 'bench', row: 0, slotIndex: -1 }; 
+
+/**
+ * NEW: Defines the valid positions for a given row number, based on D&D logic.
+ * @param {number} rowNum 
+ * @returns {Array<string>} List of allowed position strings.
+ */
+function getValidPositions(rowNum) {
+    if (rowNum === 1) return ['GK'];
+    if (rowNum === 2) return ['DEF']; // Row 2 is the defenders row
+    // שורה 4: גמישות מלאה לקשרים וחלוצים
+    if (rowNum === 4) return ['MID', 'FWD MID', 'FWD'];
+    // שורות 3, 5: גמישות לקשרים בלבד
+    if (rowNum === 3 || rowNum === 5) return ['MID', 'FWD MID']; 
+    // שורה 6: חלוצים וקשרים קדמיים
+    if (rowNum === 6) return ['FWD', 'FWD MID']; 
+    return [];
+}
+
 
 function showAddPlayerForm(status = 'bench', row = 0, slot = -1) {
     targetPlacement = { status: status, row: parseInt(row), slotIndex: parseInt(slot) };
@@ -574,11 +734,12 @@ function showAddPlayerForm(status = 'bench', row = 0, slot = -1) {
     
     const posSelect = document.getElementById('playerPos');
     posSelect.disabled = false;
-    document.getElementById('playerImg').value = "images/players/new_player.jpg"; // תמונה גנרית לדוגמה
+    document.getElementById('playerImg').value = "images/players/new_player.jpg";
 
     if (row > 0) {
+        // Find the most specific position for the row for pre-selection
         const requiredPos = ROW_TO_POSITION[row];
-        posSelect.value = requiredPos;
+        posSelect.value = requiredPos.split(' ')[0]; 
         posSelect.disabled = true; 
     }
     
@@ -600,7 +761,6 @@ function addPlayerImmediately(event) {
     const position = document.getElementById('playerPos').value;
     let imgUrl = document.getElementById('playerImg').value.trim();
     
-    // אם אין URL או שהוזן ה-URL הכללי, נשתמש בתמונת ה-Placeholder המתאימה כ-fallback.
     if (!imgUrl || imgUrl === "images/players/new_player.jpg") {
         imgUrl = getPlaceholderImage(position); 
     }
@@ -636,10 +796,6 @@ function addPlayerImmediately(event) {
     document.getElementById('new-player-form').reset();
 }
 
-/**
- * מעביר שחקן מההרכב הפותח לספסל או מוחק שחקן פצוע/ספסל לחלוטין.
- * @param {number} playerId - מזהה השחקן
- */
 function demotePlayerToBench(playerId) {
     const playerIndex = allPlayers.findIndex(p => p.id == playerId);
     if (playerIndex === -1) return;
@@ -647,34 +803,35 @@ function demotePlayerToBench(playerId) {
     const player = allPlayers[playerIndex];
     
     if (player.status === 'bench' || player.status === 'injured') {
-        // מחיקה מוחלטת מהרשימה אם השחקן כבר בספסל או פצוע
         if (confirm(`בטוח שברצונך למחוק את ${player.name} מהרשימה לחלוטין?`)) {
+            const previousRow = player.row;
             allPlayers.splice(playerIndex, 1);
-            if (player.row > 0) {
-                reIndexRow(player.row);
+            if (previousRow > 0) {
+                reIndexRow(previousRow); 
             }
         } else {
             return;
         }
     } else {
-        // העברה מההרכב לספסל (סטטוס 'bench')
-        player.status = 'bench';
         const previousRow = player.row;
+        player.status = 'bench';
         player.row = 0;
         player.slotIndex = -1;
         
         if (previousRow > 0) {
-            reIndexRow(previousRow);
+            reIndexRow(previousRow); 
         }
     }
     
     renderLineup(false);
 }
 
-
-// --- D&D and FORMATION LOGIC (REINDEXING) ---
+/**
+ * Ensures player slot indices are sequential (0, 1, 2, ...) within a row.
+ * @param {number} rowNum 
+ */
 function reIndexRow(rowNum) {
-    if (rowNum === 0) return; 
+    if (rowNum === 0 || !pitchDivs[rowNum]) return; 
 
     const startersInRow = allPlayers
                             .filter(p => p.status === 'starter' && p.row === rowNum)
@@ -682,9 +839,63 @@ function reIndexRow(rowNum) {
 
     startersInRow.forEach((player, index) => {
         const playerIndex = allPlayers.indexOf(player);
-        allPlayers[playerIndex].slotIndex = index;
+        allPlayers[playerIndex].slotIndex = index; 
     });
 }
+
+/**
+ * NEW: Fills all currently empty slots on the pitch with suitable players from the bench/injured list.
+ */
+function fillEmptySlots() {
+    // 1. Get available players (bench and injured, bench prioritized)
+    const availablePlayers = allPlayers
+        .filter(p => p.status !== 'starter')
+        .sort((a, b) => {
+            // Bench (0) before Injured (1)
+            const statusA = a.status === 'injured' ? 1 : 0;
+            const statusB = b.status === 'injured' ? 1 : 0;
+            return statusA - statusB;
+        });
+
+    // Get list of valid rows in the current formation
+    const currentFormationRowKeys = Object.keys(currentFormation).map(Number).sort((a, b) => a - b);
+    
+    // 2. Iterate through all pitch slots
+    for (const rowNum of currentFormationRowKeys) {
+        const maxSlots = currentFormation[rowNum];
+        const validPositions = getValidPositions(rowNum);
+
+        if (maxSlots === undefined) continue;
+
+        for (let slot = 0; slot < maxSlots; slot++) {
+            // Check if slot is currently empty
+            const isSlotEmpty = !allPlayers.some(p => p.row === rowNum && p.slotIndex === slot && p.status === 'starter');
+
+            if (isSlotEmpty) {
+                // Find the best available player that matches the position
+                const playerToPromoteIndex = availablePlayers.findIndex(p => {
+                    // **עדכון: בדיקת עמדות גמישה**
+                    const playerPositions = p.position.split(' ');
+                    return playerPositions.some(pPos => validPositions.includes(pPos));
+                });
+
+                if (playerToPromoteIndex !== -1) {
+                    const playerToPromote = availablePlayers[playerToPromoteIndex];
+                    const originalPlayerIndex = allPlayers.findIndex(p => p.id === playerToPromote.id);
+
+                    // 3. Promote the player
+                    allPlayers[originalPlayerIndex].status = 'starter';
+                    allPlayers[originalPlayerIndex].row = rowNum;
+                    allPlayers[originalPlayerIndex].slotIndex = slot;
+
+                    // Remove the promoted player from the available list
+                    availablePlayers.splice(playerToPromoteIndex, 1);
+                }
+            }
+        }
+    }
+}
+
 
 function changeFormation(formationKey, isAnimated = false) {
     const newFormation = FORMATIONS[formationKey];
@@ -692,34 +903,38 @@ function changeFormation(formationKey, isAnimated = false) {
 
     currentFormation = newFormation;
     setActiveButton(formationKey);
+    
+    const newFormationRowKeys = Object.keys(newFormation).map(Number);
+    const rowsToReIndex = []; 
 
-    for (const row in FORMATIONS[formationKey]) {
-        const rowNum = parseInt(row);
-        const maxSlots = FORMATIONS[formationKey][row];
-
-        const startersInRow = allPlayers
-            .filter(p => p.status === 'starter' && p.row === rowNum)
-            .sort((a, b) => a.slotIndex - b.slotIndex);
-
-        if (startersInRow.length > maxSlots) {
-            for (let i = maxSlots; i < startersInRow.length; i++) {
-                const playerToDemote = startersInRow[i];
-                const index = allPlayers.indexOf(playerToDemote);
-                
-                // העברה לספסל במקום מחיקה
-                allPlayers[index].status = 'bench';
-                allPlayers[index].row = 0;
-                allPlayers[index].slotIndex = -1;
+    // 1. Demotion Logic: Move players from obsolete/overcrowded slots to bench
+    allPlayers.filter(p => p.status === 'starter').forEach(player => {
+        const rowNum = player.row;
+        const maxSlots = newFormation[rowNum]; 
+        
+        if (!newFormationRowKeys.includes(rowNum) || (maxSlots !== undefined && player.slotIndex >= maxSlots)) {
+            
+            player.status = 'bench';
+            player.row = 0;
+            player.slotIndex = -1;
+            
+            if (rowNum > 0 && !rowsToReIndex.includes(rowNum)) { 
+                 rowsToReIndex.push(rowNum);
             }
         }
-        
-        reIndexRow(rowNum);
-    }
+    });
+    
+    // 2. Re-index and fill empty slots
+    rowsToReIndex.forEach(reIndexRow);
+    fillEmptySlots(); // AUTOMATICALLY FILL EMPTY SLOTS
+    newFormationRowKeys.forEach(reIndexRow); // Re-index again after filling to ensure correct order
     
     if(isAnimated) {
+        // Find the bench container using its ID
+        const benchContainerContent = document.getElementById('bench-list-container');
         Object.values(pitchDivs).forEach(div => div.innerHTML = '');
-        benchList.innerHTML = '';
-        injuryListContainer.innerHTML = '';
+        if (benchContainerContent) benchContainerContent.innerHTML = ''; // Clear bench
+        injuryListContainer.innerHTML = ''; // Clear injured
         renderLineup(true); 
     } else {
         renderLineup(false);
@@ -737,10 +952,7 @@ function setActiveButton(formationKey) {
     });
 }
 
-// **********************************************
-// ********* D&D (MOUSE) HANDLERS *********
-// **********************************************
-
+// --- D&D Handlers (Mouse) ---
 function handleDragStart(e) {
     const targetCard = e.target.closest('.player-card, .player-list-item-content');
     if (!targetCard) return;
@@ -758,7 +970,6 @@ function handleDragEnd(e) {
     if(targetCard) targetCard.classList.remove('dragging');
     draggingElementId = null;
     
-    // Cleanup visual state for all drop zones
     document.querySelectorAll('.drag-over-active, .drag-over-invalid').forEach(el => {
         el.classList.remove('drag-over-active');
         el.classList.remove('drag-over-invalid');
@@ -766,7 +977,7 @@ function handleDragEnd(e) {
 }
 
 function handleDragOver(e) {
-    const targetElement = e.target.closest('.player-row-slot, .player-list, #injury-list-container');
+    const targetElement = e.target.closest('.player-row-slot, #bench-list-container, #injury-list-container');
     if (!targetElement) return;
 
     e.preventDefault(); 
@@ -781,43 +992,43 @@ function handleDragOver(e) {
     let isValid = true;
 
     if (targetElement.classList.contains('player-row-slot')) {
-        const targetRow = parseInt(targetElement.dataset.row);
-        // השוער תמיד בשורה 1
-        if (targetRow === 1 && sourcePlayer.position !== 'GK') {
-            isValid = false;
-        }
-        // בדיקה כללית יותר על תפקיד כדי למנוע גרירת הגנה להתקפה וכו', אלא אם מבצעים החלפה
-        const targetPlayer = allPlayers.find(p => p.row === targetRow && p.slotIndex === parseInt(targetElement.dataset.slot) && p.status === 'starter');
-        const requiredPosition = ROW_TO_POSITION[targetRow];
-        
-        // אם המשבצת ריקה, והתפקיד לא מתאים
-        if (!targetPlayer && sourcePlayer.position !== requiredPosition && sourcePlayer.position !== 'GK' && targetRow !== 1) {
-            isValid = false;
-        }
+         const targetRow = parseInt(targetElement.dataset.row);
+         
+         const validPositions = getValidPositions(targetRow);
+         const playerPositions = sourcePlayer.position.split(' '); // **עדכון: פיצול עמדות**
+         
+         // **עדכון: בדיקה גמישה - האם אחת מעמדות השחקן נמצאת ברשימת העמדות המותרות לשורה?**
+         const isPositionMatch = playerPositions.some(pPos => validPositions.includes(pPos));
+
+         if (!isPositionMatch) isValid = false;
+
+         // If row is not defined in current formation, it's invalid
+         if (currentFormation[targetRow] === undefined) isValid = false;
+
     }
 
     if (isValid) {
         targetElement.classList.remove('drag-over-invalid');
+        targetElement.classList.add('drag-over-active');
     } else {
         targetElement.classList.add('drag-over-invalid');
+        targetElement.classList.remove('drag-over-active');
         e.dataTransfer.dropEffect = 'none';
     }
 }
 
 function handleDragEnter(e) {
-    const targetElement = e.target.closest('.player-row-slot, .player-list, #injury-list-container');
+    const targetElement = e.target.closest('.player-row-slot, #bench-list-container, #injury-list-container');
     if (!targetElement) return;
     
     e.preventDefault();
     if (isAnimationRunning) return;
 
-    if (targetElement.classList.contains('player-row-slot') || targetElement.closest('#bench-container') || targetElement.id === 'injury-list-container') {
-        targetElement.classList.add('drag-over-active');
-    }
+    // Validation logic in handleDragOver adds/removes drag-over-invalid/active
 }
 
 function handleDragLeave(e) {
-    const targetElement = e.target.closest('.player-row-slot, .player-list, #injury-list-container');
+    const targetElement = e.target.closest('.player-row-slot, #bench-list-container, #injury-list-container');
     
     if (targetElement && !targetElement.contains(e.relatedTarget)) {
         targetElement.classList.remove('drag-over-active');
@@ -829,9 +1040,17 @@ function handleDrop(e) {
     e.preventDefault();
     if (isAnimationRunning || !draggingElementId) return;
     
-    const targetElement = e.target.closest('.player-row-slot, .player-list, #injury-list-container');
+    const targetElement = e.target.closest('.player-row-slot, #bench-list-container, #injury-list-container');
     if (!targetElement) return;
     
+    // Check if the drop was invalid based on the validation in handleDragOver
+    if (targetElement.classList.contains('drag-over-invalid')) {
+        targetElement.classList.remove('drag-over-invalid');
+        targetElement.classList.remove('drag-over-active');
+        draggingElementId = null; 
+        return; 
+    }
+
     targetElement.classList.remove('drag-over-active');
     targetElement.classList.remove('drag-over-invalid');
 
@@ -839,14 +1058,12 @@ function handleDrop(e) {
     
     processDropLogic(sourcePlayer, targetElement);
     
+    // Rerun fillEmptySlots to ensure the vacated slot is filled immediately, if possible
+    fillEmptySlots(); 
     renderLineup(false); 
 }
 
-// **********************************************
-// ********* D&D (TOUCH) HANDLERS *********
-// **********************************************
-
-// Utility to get element under a touch point
+// --- D&D Handlers (Touch) ---
 function getElementFromTouch(touch) {
     return document.elementFromPoint(touch.clientX, touch.clientY);
 }
@@ -884,14 +1101,13 @@ function handleTouchStart(e) {
     draggingElementId = targetCard.dataset.id;
     currentTouchCard = targetCard;
 
-    // 1. Create clone (ghost)
     touchDragClone = targetCard.cloneNode(true);
     touchDragClone.classList.add('dragging'); 
     touchDragClone.style.position = 'absolute';
     touchDragClone.style.zIndex = '1000';
     touchDragClone.style.width = targetCard.offsetWidth + 'px';
     touchDragClone.style.height = targetCard.offsetHeight + 'px';
-    touchDragClone.style.pointerEvents = 'none'; // Crucial for detecting element underneath
+    touchDragClone.style.pointerEvents = 'none';
 
     document.body.appendChild(touchDragClone);
     
@@ -899,7 +1115,7 @@ function handleTouchStart(e) {
     touchDragClone.style.left = touch.clientX - targetCard.offsetWidth / 2 + 'px';
     touchDragClone.style.top = touch.clientY - targetCard.offsetHeight / 2 + 'px';
 
-    currentTouchCard.style.opacity = '0.1'; // Make original card almost invisible
+    currentTouchCard.style.opacity = '0.1';
     
     document.addEventListener('touchmove', handleTouchMove, { passive: false });
     document.addEventListener('touchend', handleTouchEnd, { once: true });
@@ -911,13 +1127,9 @@ function handleTouchMove(e) {
 
     const touch = e.touches[0];
     
-    // Update clone position
     touchDragClone.style.left = touch.clientX - touchDragClone.offsetWidth / 2 + 'px';
     touchDragClone.style.top = touch.clientY - touchDragClone.offsetHeight / 2 + 'px';
     
-    // Visual feedback on potential drop zones
-    
-    // Temporarily hide clone to check element underneath
     touchDragClone.style.visibility = 'hidden';
     const elementUnder = getElementFromTouch(touch);
     touchDragClone.style.visibility = 'visible';
@@ -927,16 +1139,30 @@ function handleTouchMove(e) {
         el.classList.remove('drag-over-invalid');
     });
 
-    const targetElement = elementUnder ? elementUnder.closest('.player-row-slot, .player-list, #injury-list-container') : null;
+    const targetElement = elementUnder ? elementUnder.closest('.player-row-slot, #bench-list-container, #injury-list-container') : null;
     if (targetElement) {
-        targetElement.classList.add('drag-over-active');
-        // Simple position validation check for visual feedback (optional)
         const sourcePlayer = allPlayers.find(p => p.id == draggingElementId);
+        let isValid = true;
+
         if (targetElement.classList.contains('player-row-slot')) {
              const targetRow = parseInt(targetElement.dataset.row);
-             if (targetRow === 1 && sourcePlayer.position !== 'GK') {
-                 targetElement.classList.add('drag-over-invalid');
-             }
+             
+             const validPositions = getValidPositions(targetRow);
+             const playerPositions = sourcePlayer.position.split(' '); // **עדכון: פיצול עמדות**
+             
+             // **עדכון: בדיקה גמישה - האם אחת מעמדות השחקן נמצאת ברשימת העמדות המותרות לשורה?**
+             const isPositionMatch = playerPositions.some(pPos => validPositions.includes(pPos));
+             
+             if (!isPositionMatch) isValid = false;
+
+             // If row is not defined in current formation, it's invalid
+             if (currentFormation[targetRow] === undefined) isValid = false;
+        }
+        
+        if (isValid) {
+            targetElement.classList.add('drag-over-active');
+        } else {
+            targetElement.classList.add('drag-over-invalid');
         }
     }
 }
@@ -947,34 +1173,34 @@ function handleTouchEnd(e) {
     const touch = e.changedTouches[0];
     if (!touch) return cleanUpTouch();
 
-    // Find the drop target
     touchDragClone.style.visibility = 'hidden';
     const elementUnder = getElementFromTouch(touch);
-    // ** שינוי קריטי **: נותן עדיפות ל-li אם נמצאים מעל רשימת שחקנים, אחרת מחפש slot או קונטיינר כללי
-    const targetElement = elementUnder ? elementUnder.closest('.player-row-slot, .player-list, #injury-list-container') : null;
+    const targetElement = elementUnder ? elementUnder.closest('.player-row-slot, #bench-list-container, #injury-list-container') : null;
 
-    
-    // Only proceed if a valid drop target was found
-    if (targetElement) {
+    if (targetElement && !targetElement.classList.contains('drag-over-invalid')) {
         const sourcePlayer = allPlayers.find(p => p.id == draggingElementId);
         processDropLogic(sourcePlayer, targetElement);
+        // Rerun fillEmptySlots after the drop
+        fillEmptySlots();
         renderLineup(false); 
     }
 
     cleanUpTouch();
 }
 
-// **********************************************
-// ********* CORE DROP LOGIC (Reusable) *********
-// **********************************************
-
+/**
+ * Handles the core logic of updating player status and position after a successful drop.
+ * @param {object} sourcePlayer The player being dragged.
+ * @param {HTMLElement} targetElement The element where the player was dropped.
+ */
 function processDropLogic(sourcePlayer, targetElement) {
     if (!sourcePlayer || !targetElement) return;
 
     const sourceIndex = allPlayers.indexOf(sourcePlayer);
     const sourcePrevRow = sourcePlayer.row; 
+    const benchContainer = document.getElementById('bench-list-container');
 
-    // 1. Dropping on the Injury Container
+    // --- Drop to Injured ---
     if (targetElement.id === 'injury-list-container') {
         if (sourcePlayer.status === 'starter') {
             reIndexRow(sourcePrevRow);
@@ -983,10 +1209,8 @@ function processDropLogic(sourcePlayer, targetElement) {
         allPlayers[sourceIndex].row = 0;
         allPlayers[sourceIndex].slotIndex = -1;
     }
-
-    // 2. Dropping on the Bench Container (MOVE TO BENCH)
-    // ה-targetElement יכול להיות ה-ul.player-list או הקונטיינר #bench-container-wrapper (אם זה היה מחובר לשם)
-    else if (targetElement.closest('#bench-container') || targetElement.closest('.bench-section') || targetElement.classList.contains('player-list')) {
+    // --- Drop to Bench (The new grouped bench container) ---
+    else if (targetElement === benchContainer || targetElement.closest('#bench-list-container')) {
         if (sourcePlayer.status === 'starter') {
             reIndexRow(sourcePrevRow);
         }
@@ -994,28 +1218,18 @@ function processDropLogic(sourcePlayer, targetElement) {
         allPlayers[sourceIndex].row = 0;
         allPlayers[sourceIndex].slotIndex = -1; 
     }
-    
-    // 3. Dropping on a Pitch Slot (SWAP or SUB or MOVE)
+    // --- Drop to Pitch Slot ---
     else if (targetElement.classList.contains('player-row-slot')) {
         const targetRow = parseInt(targetElement.dataset.row);
         const targetSlot = parseInt(targetElement.dataset.slot);
         
         const targetPlayer = allPlayers.find(p => p.row === targetRow && p.slotIndex === targetSlot && p.status === 'starter');
-        const requiredPosition = ROW_TO_POSITION[targetRow];
-
-        // Validation - Basic check (GK always row 1, general position match)
-        if (targetRow === 1 && sourcePlayer.position !== 'GK') return;
-        
-        if (!targetPlayer) {
-             // אם המשבצת ריקה: מונע גרירת שחקן לתפקיד לא מתאים (למעט שוער)
-            if (targetRow > 1 && sourcePlayer.position !== requiredPosition && sourcePlayer.position !== 'GK') return;
-        }
 
         if (targetPlayer) {
             const targetIndex = allPlayers.indexOf(targetPlayer);
 
             if (targetPlayer.status === 'starter' && sourcePlayer.status === 'starter') {
-                // SWAP (Starter to Starter)
+                // Starter-to-Starter swap
                 const tempRow = targetPlayer.row;
                 const tempSlot = targetPlayer.slotIndex;
                 allPlayers[targetIndex].row = sourcePlayer.row;
@@ -1023,8 +1237,13 @@ function processDropLogic(sourcePlayer, targetElement) {
                 allPlayers[sourceIndex].row = tempRow;
                 allPlayers[sourceIndex].slotIndex = tempSlot;
 
+                if (sourcePrevRow !== targetRow) {
+                    reIndexRow(sourcePrevRow);
+                    reIndexRow(targetRow);
+                }
+                
             } else if (targetPlayer.status === 'starter' && sourcePlayer.status !== 'starter') {
-                // SUB (Bench/Injured to Starter, Target to Bench)
+                // Bench/Injured-to-Starter swap (target starter goes to bench)
                 allPlayers[targetIndex].status = 'bench';
                 allPlayers[targetIndex].row = 0;
                 allPlayers[targetIndex].slotIndex = -1;
@@ -1033,30 +1252,29 @@ function processDropLogic(sourcePlayer, targetElement) {
                 allPlayers[sourceIndex].row = targetRow;
                 allPlayers[sourceIndex].slotIndex = targetSlot;
                 
+                if (sourcePrevRow > 0) reIndexRow(sourcePrevRow); 
+                reIndexRow(targetRow); 
             }
             
         } 
         else {
-             // MOVE TO EMPTY SLOT
+             // Drop to an Empty Slot
              if (sourcePlayer.status === 'starter') {
                  reIndexRow(sourcePrevRow); 
              }
+             
              allPlayers[sourceIndex].status = 'starter';
              allPlayers[sourceIndex].row = targetRow;
              allPlayers[sourceIndex].slotIndex = targetSlot;
+
+             reIndexRow(targetRow); 
         }
     }
 }
 
-
-// --- RENDERING & ANIMATION ---
-
 function attachListenersToCard(cardContent) {
-    // Desktop D&D listeners
     cardContent.addEventListener('dragstart', handleDragStart);
     cardContent.addEventListener('dragend', handleDragEnd);
-
-    // Mobile Touch listeners
     cardContent.addEventListener('touchstart', handleTouchStart, { passive: false });
 }
 
@@ -1066,7 +1284,14 @@ function createPlayerCard(player, isPitchCard = true, isAnimatedSetup = false) {
     cardContent.dataset.id = player.id;
     cardContent.setAttribute('draggable', true);
     cardContent.setAttribute('tabindex', '0');
-    cardContent.setAttribute('aria-label', `${player.name} (${player.position})`);
+    
+    // **עדכון: תצוגה מותאמת לעמדה גמישה**
+    let displayPosition = player.position;
+    if (player.position === "MID DEF") {
+        displayPosition = "MID/DEF";
+    }
+
+    cardContent.setAttribute('aria-label', `${player.name} (${displayPosition})`);
     
     if (!isPitchCard && player.status === 'injured') {
         cardContent.classList.add('injured');
@@ -1076,18 +1301,14 @@ function createPlayerCard(player, isPitchCard = true, isAnimatedSetup = false) {
 
     cardContent.innerHTML = `
         <img src="${playerImg}" alt="תמונה של ${player.name}" onerror="this.src='${getPlaceholderImage(player.position)}';">
-        <span>${player.name} (${player.position})</span>
+        <span>${player.name} (${displayPosition})</span>
         <button class="delete-btn" onclick="demotePlayerToBench(${player.id})" aria-label="הורד את ${player.name} לספסל">×</button>
     `;
     
-    // מניעת הפעלה של דראג מהכפתור
     cardContent.querySelector('.delete-btn').addEventListener('dragstart', (e) => e.stopPropagation());
     cardContent.querySelector('.delete-btn').addEventListener('touchstart', (e) => e.stopPropagation());
 
-
-    // ** הקוד המעודכן לחיבור הליסנרים **
     attachListenersToCard(cardContent);
-    // ** סוף קוד מעודכן **
 
     if (isAnimatedSetup && player.status === 'starter') {
         cardContent.classList.add('animated-hide');
@@ -1099,70 +1320,130 @@ function createPlayerCard(player, isPitchCard = true, isAnimatedSetup = false) {
 function renderLineup(animate = false) {
     isAnimationRunning = animate;
 
-    // 1. Clear Pitch and Lists
-    Object.values(pitchDivs).forEach(div => div.innerHTML = '');
-    benchList.innerHTML = '';
+    // Clear and reset all pitch rows first
+    for (let row = 1; row <= 6; row++) {
+        const rowDiv = pitchDivs[row];
+        if (rowDiv) rowDiv.innerHTML = '';
+        reIndexRow(row); 
+    }
+    // benchList.innerHTML = ''; // REMOVED: No longer a single list
     injuryListContainer.innerHTML = '';
     
-    // 2. Render Pitch Slots (including GK row 1)
-    for (let row = 1; row <= 4; row++) {
+    // NEW: Reference the container for grouped lists and clear it
+    const benchContainerContent = document.getElementById('bench-list-container');
+    if (!benchContainerContent) return;
+    benchContainerContent.innerHTML = '';
+
+    
+    // --- Render Pitch ---
+    for (let row = 1; row <= 6; row++) {
         const rowDiv = pitchDivs[row];
+        const currentMaxSlots = currentFormation[row];
         
-        if (currentFormation[row]) {
-            const currentMaxSlots = currentFormation[row];
+        if (rowDiv && currentMaxSlots !== undefined) {
+            
+            // Get all actual starters for this row, sorted by their slot index
+            const actualStarters = allPlayers
+                .filter(p => p.status === 'starter' && p.row === row)
+                .sort((a, b) => a.slotIndex - b.slotIndex);
             
             for (let i = 0; i < currentMaxSlots; i++) {
-                const player = allPlayers.find(p => p.status === 'starter' && p.row === row && p.slotIndex === i);
+                const player = actualStarters.find(p => p.slotIndex === i);
                 
                 const slot = document.createElement('div');
                 slot.className = 'player-row-slot';
                 slot.dataset.row = row;
                 slot.dataset.slot = i;
                 
-                // ** תיקון קריטי 3: הוספת מאזיני Drop לכל משבצת במגרש **
+                // Add D&D listeners to the slot
                 slot.addEventListener('dragover', handleDragOver);
                 slot.addEventListener('dragenter', handleDragEnter);
                 slot.addEventListener('dragleave', handleDragLeave);
                 slot.addEventListener('drop', handleDrop);
-                // ** סוף תיקון 3 **
-                
 
                 if (player) {
                     const card = createPlayerCard(player, true, animate);
                     slot.appendChild(card);
                 } else {
+                    // Slot is empty. We do NOT add the '+' button to keep the pitch clean,
+                    // but the slot remains an empty drag target.
                     slot.classList.add('empty-slot');
-                    const addButton = document.createElement('button');
-                    addButton.className = 'add-btn';
-                    addButton.textContent = '+';
-                    addButton.setAttribute('aria-label', `הוסף שחקן למשבצת שורה ${row} מיקום ${i+1}`);
-                    addButton.addEventListener('click', () => showAddPlayerForm('starter', row, i));
-                    slot.appendChild(addButton);
+                    
+                    // נשארת אופציה ידנית להוספת שחקן חדש, נשתמש בכפתור קטן יותר.
+                    // כפתור ה-ADD נמחק כדי למנוע את ה"פלוסים המיותרים" שציינת.
                 }
                 rowDiv.appendChild(slot);
             }
         }
     }
     
-    // 3. Render Bench and Injured Players
+    // --- Render Bench & Injured ---
     const nonStarters = allPlayers
-        .filter(p => p.status !== 'starter')
-        .sort((a, b) => a.position.localeCompare(b.position) || a.name.localeCompare(b.name));
+        .filter(p => p.status !== 'starter');
 
-    nonStarters.forEach(player => {
+    // 1. Group the players
+    const groupedBench = nonStarters.reduce((acc, player) => {
+        if (player.status === 'bench') {
+            // Get group data, default to 'Other' if position is unknown
+            const groupData = POSITION_GROUPS[player.position] || POSITION_GROUPS["Other"];
+            const groupKey = groupData.groupKey; // Use a canonical key for grouping
+            
+            if (!acc[groupKey]) {
+                acc[groupKey] = {
+                    name: groupData.name,
+                    order: groupData.order,
+                    players: []
+                };
+            }
+            acc[groupKey].players.push(player);
+        }
+        return acc;
+    }, {});
+
+    // 2. Sort the groups and their players
+    const sortedGroups = Object.values(groupedBench)
+        .sort((a, b) => a.order - b.order); // Sort by the defined order
+
+    // Sort players within each group alphabetically by name
+    sortedGroups.forEach(group => {
+        group.players.sort((a, b) => a.name.localeCompare(b.name));
+    });
+
+    // 3. Render the grouped bench sections
+    sortedGroups.forEach(group => {
+        const groupContainer = document.createElement('div');
+        groupContainer.className = 'bench-group-container';
+        
+        // Header (The H3 will be styled by the new CSS)
+        const header = document.createElement('h3');
+        header.textContent = group.name;
+        groupContainer.appendChild(header);
+
+        // List
+        const ul = document.createElement('ul');
+        ul.className = 'player-list'; // Reusing existing flex styling for vertical cards
+        
+        group.players.forEach(player => {
+            const cardContent = createPlayerCard(player, false); 
+            const listItem = document.createElement('li'); 
+            listItem.appendChild(cardContent);
+            ul.appendChild(listItem);
+        });
+        
+        groupContainer.appendChild(ul);
+        benchContainerContent.appendChild(groupContainer);
+    });
+
+    // --- Render Injured ---
+    nonStarters.filter(p => p.status === 'injured').forEach(player => {
         const cardContent = createPlayerCard(player, false); 
         const listItem = document.createElement('li'); 
 
         listItem.appendChild(cardContent);
-        
-        if (player.status === 'bench') {
-            benchList.appendChild(listItem);
-        } else if (player.status === 'injured') {
-            injuryListContainer.appendChild(listItem);
-        }
+        injuryListContainer.appendChild(listItem);
     });
 
-    // 4. Handle Animation Start 
+    // --- Run Animation ---
     if (animate) {
         let delay = 0;
         const pitchCards = document.querySelectorAll('.player-card');
@@ -1185,7 +1466,6 @@ function renderLineup(animate = false) {
     }
 }
 
-
 function runPitchAnimation() {
     if (isAnimationRunning) return; 
 
@@ -1196,18 +1476,15 @@ function runPitchAnimation() {
     renderLineup(true); 
 }
 
-// --- INITIALIZATION AND EVENT LISTENERS ---
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // ** החיבורים הדינמיים ל-Drop (dragover/enter/leave/drop) מתבצעים עכשיו בתוך `renderLineup` על כל `.player-row-slot` **
-    // ה-ul של הספסל והפצועים נשארים מחוברים ב-HTML ישירות, כפי שהיה.
-    
-    changeFormation('4-3-3', true); // יפעיל את renderLineup בפעם הראשונה
+    // Fill slots upon initial load
+    fillEmptySlots(); 
+    changeFormation('4-3-3', true); 
     
     document.getElementById('formation-control-buttons').addEventListener('click', (e) => {
         const button = e.target.closest('button[data-formation]');
         if (button) {
-            changeFormation(button.dataset.formation, true);
+            changeFormation(button.dataset.formation, true); 
         }
     });
 
